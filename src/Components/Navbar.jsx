@@ -11,9 +11,9 @@ export default function NavBar(){
     <div>
         <ul>
                 <li><a >Your balance: $20.00</a></li>
-                <li><Link to="/market">Market place</Link></li>
-                <li><Link to="/account">Account</Link></li>
-                <li><Link to="/">Logout</Link></li>
+                <li><Link to="/market"><p>Market Place</p></Link></li>
+                <li><Link to="/account"><p>Account</p></Link></li>
+                <li><Link to="/"><p>Logout</p></Link></li>
             </ul>
 </div>
            

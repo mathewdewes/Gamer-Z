@@ -19,9 +19,7 @@
 }
 
 
-.login h1{
-    margin-bottom: 30px;
-}
+
 
 
 
@@ -34,7 +32,7 @@ form input{
 display: block;
 margin:auto;
 margin-bottom: 20px;
-margin-top: 5px;
+margin-top: 20px;
 border-radius: 3px;
 border: 1px solid;
 height: 20px;
@@ -63,9 +61,20 @@ color: black;
 .grid{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    margin: 20px 0;
+    &__item{
+        padding: 20px;
+    }
 }
 
 .profile{
     display: grid;
     grid-template-columns: 215px 1fr 1fr;
+}
+
+.pageHeading{
+   
+        text-align: center;
+        margin: 30px;
+    
 }
