@@ -2,7 +2,7 @@ import React from "react";
 import testImage from "../images/matt.JPG";
 import { Link } from "react-router-dom";
 
-export default function MarketPlace(props){
+export default function MarketPlace(){
     return(
         <div className="marketPlace">
             <h1 className="pageHeading">Market Place</h1>

@@ -9,7 +9,6 @@ export default function Login(props){
     const [password, setPassword] = useState("");
 
     const handleLogin=(e)=>{
-e.preventDefault();
 signInWithEmailAndPassword(auth, email, password).then((userCredential)=>{
     console.log(userCredential);
     props.setUser({
@@ -24,12 +23,12 @@ signInWithEmailAndPassword(auth, email, password).then((userCredential)=>{
     return(
 <div className="login">
   
-   <form action="POST">
+   <form onSubmit={(e)=>handleLogin(e)} action="POST">
    <h1>Login</h1>
     <p>Please enter your email and password</p>
     <input onChange={(e)=>setEmail(e.target.value)}  placeholder="Email" type="text" id="email" name="email" />
     <input onChange={(e)=>setPassword(e.target.value)} placeholder="Password" type="password" id="password" name="password" />
-    <button onClick={(e)=>handleLogin(e)} type="button">Login</button>
+    <button type="submit">Login</button>
     <button type="button"><Link  to="/register"><p>Register</p></Link></button>
     <div>
     </div>
