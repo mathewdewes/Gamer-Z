@@ -1,9 +1,8 @@
 
 import NavBar from './Components/Navbar';
 import Footer from './Components/Footer';
-// import MarketPlace from './Components/Marketplace';
 import Product from './Components/Product';
-import {HashRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes, redirect} from "react-router-dom";
 import Login from './Components/Login';
 import MarketPlace from './Components/Marketplace';
 import Account from './Components/Account';
@@ -15,24 +14,41 @@ import {collection, getDocs, addDoc, updateDoc, doc, deleteDoc} from 'firebase/f
 
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const [user, setUser] = useState({
+  name:"",
+  balance:"",
+  gamesOwned:"",
+  email:"",
+  userCredential:null
+
+});
+
+const handleLogout=()=>{
+  setUser({  name:"",
+  balance:"",
+  gamesOwned:"",
+  email:"",
+  userCredential:null})
+}
+
+
  
   return (
-    <HashRouter>
+    <BrowserRouter>
       <div className="App">
-         <NavBar/>
+         <NavBar handleLogout={handleLogout}/>
          <Routes>
-          <Route path='/' element={<Login/>}/>
-          <Route path='/market' element={<MarketPlace/>}/>
+          <Route path='/login' element={<Login setUser={setUser}/>}/>
+          <Route path='/' element={<MarketPlace/>}/>
           <Route path='/product' element={<Product/>}/>
           <Route path='/account' element={<Account/>}/>
-          <Route path='/register' element={<Register/>}/>
+          <Route path='/register' element={<Register setUser={setUser}/>}/>
          </Routes>
-         {/* <MarketPlace/> */}
-         {/* <Login/> */}
-        
+  
     </div>
 <Footer/>
-    </HashRouter>
+    </BrowserRouter>
     
     
   );
