@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { collection, query, getDocs } from "firebase/firestore";
+import React, {useState, useEffect} from "react";
+import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../firebase-config";
 
-export default async function ListItem() {
-  const [items, setItems] = useState([]);
+export default function ListItem(props) {
+
+
   useEffect(() => {
     async function getItems() {
       const querySnapShot = await getDocs(collection(db, "Items"));
@@ -16,24 +17,29 @@ export default async function ListItem() {
     }
 
     getItems().then((items) => {
-      setItems(items);
+      props.setItems(items);
     });
   }, []);
-  if (items.length > 0) {
+
+
+  if (props.items &&  props.items.length > 0) {
     return (
       <div>
-        {items.forEach((element) => {
-          return <Item />;
+        {props.items.map((item) => {
+          return <Item name={item.name} price={item.price}/>;
         })}
       </div>
     );
   } else {
-    <>
-      <div>There are no items to be displayed.</div>
-    </>;
+    return <></>;
   }
 }
 
-const Item = () => {
-  return <div>Item</div>;
-};
+const Item=(props)=>{
+    return(
+        <div>
+            <p>{props.name}</p>
+            <p>{props.price}</p>
+        </div>
+    )
+}

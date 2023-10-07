@@ -6,6 +6,7 @@ import ListItem from "./marketplace/ListItem";
 
 export default function MarketPlace(props){
     const [show, setShow] = useState(false);
+    const [items, setItems] = useState([]);
 
 
     const handleClose=()=>{
@@ -30,12 +31,12 @@ export default function MarketPlace(props){
         <div><button><Link  to="/product"><p>View more</p></Link></button>
         <button><p>Delete</p></button></div>
     </div>
-    <ListItem/>
+    <ListItem item={items} setItems={setItems}/>
 
 
    
 </div>
-{show ? (<CreatItem handleClose={handleClose} user={props.user}/>) : <></>}
+{show ? (<CreatItem setItems={setItems} handleClose={handleClose} user={props.user}/>) : <></>}
         </div>
 
     )

@@ -8,13 +8,17 @@ export default function CreatItem(props){
     const [name, setName] = useState("");
     const [price, setPrice] = useState(0.0);
 
-    const handleSubmit=()=>{
+    const handleSubmit=async ()=>{
         try{
             const count = addDoc(collection(db, "Items"), {
                 name: name,
                 price: price,
                 user_id: props.user.userCredential,
               });
+              const item = await count;
+              props.setItems(current=>[...current, item])
+              console.log(item);
+              console.log(count);
               props.handleClose()
         } catch(error){
             console.log(error);
