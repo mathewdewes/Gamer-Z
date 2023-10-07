@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, redirect } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase-config";
+import { auth, db } from "../firebase-config";
+import { Query, where, collection, query } from "firebase/firestore";
 
 
 export default function Login(props){
@@ -10,13 +11,14 @@ export default function Login(props){
 
     const handleLogin=(e)=>{
 signInWithEmailAndPassword(auth, email, password).then((userCredential)=>{
-    console.log(userCredential);
     props.setUser({
     email:email,
     userCredential:userCredential
 
     })
-    redirect("/");
+   
+
+    //redirect("/"); 
 }).catch((error)=>console.log(error));
 
     }

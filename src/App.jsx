@@ -10,27 +10,60 @@ import Register from './Components/Register';
 import { useState, useEffect } from 'react';
 import {createUserWithEmailAndPassword, onAuthStateChanged, signOut} from 'firebase/auth'
 import {db, auth} from './firebase-config';
-import {collection, getDocs, addDoc, updateDoc, doc, deleteDoc} from 'firebase/firestore';
+import {collection, getDocs, addDoc, updateDoc, doc, deleteDoc, query, where} from 'firebase/firestore';
 
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 const [user, setUser] = useState({
-  name:"",
-  balance:"",
-  gamesOwned:"",
   email:"",
   userCredential:null
 
 });
+const [userDetails, setUserDetails] = useState({
+  name:"",
+  userCredential:null
+})
+
+
 
 const handleLogout=()=>{
-  setUser({  name:"",
-  balance:"",
-  gamesOwned:"",
-  email:"",
-  userCredential:null})
+signOut(user);
 }
+
+
+
+useEffect(()=>{
+  const listen = onAuthStateChanged(auth, (user)=>{
+    if (user){
+      setUser({
+        email:user.email,
+        userCredential: user.uid
+      })
+      const getUserDetails= async()=>  {
+        const accountRef = collection(db, "Account")
+        const q = query(accountRef, where("uid", "==", user.uid))
+        const querySnapShot =  getDocs(q)
+        return querySnapShot
+
+      }
+     const result = getUserDetails()
+     result.forEach(res => {
+      console.log(res.id, res.data());
+     });
+
+    } else{
+      setUser({
+        email:"",
+        userCredential:null
+      })
+    }
+    return ()=>{
+      listen();
+    }
+
+  });
+},[])
 
 
  
@@ -39,11 +72,11 @@ const handleLogout=()=>{
       <div className="App">
          <NavBar handleLogout={handleLogout}/>
          <Routes>
-          <Route path='/login' element={<Login setUser={setUser}/>}/>
+          <Route path='/login' element={<Login setUserDetails={setUserDetails} setUser={setUser}/>}/>
           <Route path='/' element={<MarketPlace/>}/>
           <Route path='/product' element={<Product/>}/>
-          <Route path='/account' element={<Account/>}/>
-          <Route path='/register' element={<Register setUser={setUser}/>}/>
+          <Route path='/account' element={<Account userDetails={userDetails}/>}/>
+          <Route path='/register' element={<Register setUserDetails={setUserDetails} setUser={setUser}/>}/>
          </Routes>
   
     </div>

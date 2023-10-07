@@ -34,6 +34,10 @@ p{
 a{
     text-decoration: none;
     outline: 0;
+    color: #FFF5E0;
+    &:hover{
+        color: white;
+    }
 
 }
 

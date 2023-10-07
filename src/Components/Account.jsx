@@ -2,6 +2,7 @@ import React from "react";
 import testImage from "../images/matt.JPG";
 
 export default function Account(props){
+    console.log(props);
     return(
         <div>
             <h1 className="pageHeading">Account</h1>
@@ -11,10 +12,7 @@ export default function Account(props){
   
    <img src={testImage} alt="" />
    <div>
-   <h2>Mathew Dewes</h2>
-   <p>Age: 25</p>
-   <p>Balance: $420</p>
-   <p>Games owned: 10</p>
+
 
    </div>
    <div>
