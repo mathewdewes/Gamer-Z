@@ -11,7 +11,7 @@ export default function NavBar(props){
     <div>
         <ul>
                 <li><a >Your balance: $20.00</a></li>
-                <li><Link to="/market"><a>Market Place</a></Link></li>
+                <li><Link to="/"><a>Market Place</a></Link></li>
                 <li><Link to="/account"><a>Account</a></Link></li>
                 <li><Link to="/login"><a onClick={()=>props.handleLogout}>Logout</a></Link></li>
             </ul>
