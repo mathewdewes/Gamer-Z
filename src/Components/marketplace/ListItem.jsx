@@ -5,28 +5,33 @@ import { db } from "../../firebase-config";
 export default async function ListItem() {
   const [items, setItems] = useState([]);
   useEffect(() => {
-    const getItems = async () => {
+    async function getItems() {
       const querySnapShot = await getDocs(collection(db, "Items"));
-      const fetchedData = querySnapShot.docs.map((doc) => ({
+
+      return querySnapShot.docs.map((doc) => ({
         id: doc.id,
+
         ...doc.data(),
       }));
-      setItems(fetchedData);
-    };
-    getItems()
+    }
+
+    getItems().then((items) => {
+      setItems(items);
+    });
   }, []);
-if (items.length > 0){
+  if (items.length > 0) {
     return (
-        <div>
-          {items.forEach((element) => {
-            return <Item />;
-          })}
-        </div>
-      );
-} else{
-    <><div>There are no items to be displayed.</div></>
-}
-  
+      <div>
+        {items.forEach((element) => {
+          return <Item />;
+        })}
+      </div>
+    );
+  } else {
+    <>
+      <div>There are no items to be displayed.</div>
+    </>;
+  }
 }
 
 const Item = () => {
