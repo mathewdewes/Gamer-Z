@@ -22,16 +22,13 @@ export default function MarketPlace(props){
             <h1 className="pageHeading">Market Place</h1>
 <div className="listing">
     <div className="listing__item">
-        <div className="listing__image"><img src={testImage} alt="test Image" /></div>
         <div>
-        <h3>Hello</h3>
-        <p>Price: $200.00</p>
         <button onClick={()=>handleShow()}>Add item</button>
         </div>
-        <div><button><Link  to="/product"><p>View more</p></Link></button>
-        <button><p>Delete</p></button></div>
+        <div>
+        </div>
     </div>
-    <ListItem item={items} setItems={setItems}/>
+    <ListItem items={items} setItems={setItems}/>
 
 
    
