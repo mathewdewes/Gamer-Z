@@ -1,56 +1,63 @@
 import React, { useState, useEffect } from "react";
+
 import profileImage from "../../images/profileImage.png";
-import { collection, where, query, getDocs } from "firebase/firestore";
+
+import { getDoc, doc } from "firebase/firestore";
+
 import { db } from "../../firebase-config";
+
 import { useParams } from "react-router-dom";
 
 export default function ViewItem(props) {
-    const [item, setItem] = useState(null);
-  useEffect(async () => {
+  const [item, setItem] = useState(null);
+
+  const params = useParams();
+
+  const id = params.id;
+
+  useEffect(() => {
     async function getItem() {
-      const accountRef = collection(db, "Items");
+      const itemRef = doc(db, "Items", id);
 
-      const q = query(accountRef, where("id", "==", id));
-
-      const querySnapShot = getDocs(q);
+      const querySnapShot = await getDoc(itemRef);
 
       return querySnapShot;
     }
 
-    const result = await getItem();
+    const fetchData = async () => {
+      const result = await getItem();
 
-    result.forEach((res) => {
-      return setItem({
-        name: res.data().name,
+      setItem({
+        name: result.data().name,
 
-        price: res.data().price,
+        price: result.data().price,
       });
-    });
-  }, []);
-  const params = useParams();
-  const id = params.id;
-  console.log(params);
-  console.log(props.match);
-  if (item !==null){
+    };
+
+    fetchData();
+  }, [id]);
+  console.log(item);
+  if (item ==null) {
+    return <div>loading....</div>;
+  } else {
     return (
-        <div className="product">
-          <img src={profileImage} alt="" />
-          <h1>{props.name}</h1>
-          <p className="product__description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nulla
-            vel id debitis repellat ipsa, placeat perspiciatis non esse obcaecati!
-          </p>
-          <button>Purchase</button>
-          <button>Return to Market</button>
-        </div>
-      );
-    } else{
-        return (
-            <div>
-                loading
-            </div>
-        )
-    } 
+      <div className="product">
+        <img src={profileImage} alt="" />
+
+        <h1>{item.name}</h1>
+
+        <h1>${item.price}</h1>
+
+        <p className="product__description">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
+          nulla vel id debitis repellat ipsa, placeat perspiciatis non esse
+          obcaecati!
+        </p>
+
+        <button>Purchase</button>
+
+        <button>Return to Market</button>
+      </div>
+    );
   }
-  
-  
+}
