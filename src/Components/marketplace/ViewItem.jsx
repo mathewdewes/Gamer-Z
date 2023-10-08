@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import profileImage from "../../images/profileImage.png";
 import { collection, where, query, getDocs } from "firebase/firestore";
 import { db } from "../../firebase-config";
+import { useParams } from "react-router-dom";
 
 export default function ViewItem(props) {
     const [item, setItem] = useState(null);
@@ -26,7 +27,9 @@ export default function ViewItem(props) {
       });
     });
   }, []);
-  const id = 1;
+  const params = useParams();
+  const id = params.id;
+  console.log(params);
   console.log(props.match);
   if (item !==null){
     return (
