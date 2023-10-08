@@ -1,22 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import testImage from "../images/matt.JPG";
 import { Link } from "react-router-dom";
+import CreatItem from "./marketplace/CreateItem";
+import ListItem from "./marketplace/ListItem";
 
-export default function MarketPlace(props){
-    return(
-<div className="listing">
-    <div className="listing__item">
-        <div className="listing__image"><img src={testImage} alt="test Image" /></div>
-        <div>
-        <p>{props.name}</p>
-        <p>Price: ${props.price}</p>
+export default function MarketPlace(props) {
+  const [show, setShow] = useState(false);
+  const [items, setItems] = useState([]);
+
+  const handleClose = () => {
+    setShow(false);
+  };
+
+  const handleShow = () => {
+    setShow(true);
+  };
+  return (
+    <div className="marketPlace">
+      <h1 className="pageHeading">Market Place</h1>
+      <div className="listing">
+        <div className="listing__item">
+          <div>
+            <button onClick={() => handleShow()}>Add item</button>
+          </div>
+          <div></div>
         </div>
-        <div><button><Link  to="/product">View More</Link></button>
-        <button onClick={props.delete}>Delete</button></div>
+        <ListItem items={items} setItems={setItems} />
+      </div>
+      {show ? (
+        <CreatItem
+          setItems={setItems}
+          handleClose={handleClose}
+          user={props.user}
+        />
+      ) : (
+        <></>
+      )}
     </div>
-
-
-   
-</div>
-    )
+  );
 }
