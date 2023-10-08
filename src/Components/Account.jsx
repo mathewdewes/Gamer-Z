@@ -17,19 +17,15 @@ export default function Account(props) {
   const [listings, setListings] = useState([]);
 
   const handleDelete = async (id)=>{
-const listingRef = doc(db, "Items", id)
-const deletedListing = await deleteDoc(listingRef)
-setListings(prevListings=>prevListings.filter(item=>item.id !==id))
+    const listingRef = doc(db, "Items", id)
+    const deletedListing = await deleteDoc(listingRef)
+    setListings(prevListings=>prevListings.filter(item=>item.id !==id))
   }
 
   const handleEdit = async (name, price, id) => {
-    console.log("HERE", name, price, id);
-
     const listingRef = doc(db, "Items", id);
-
     const listingReq = await updateDoc(listingRef, {
       name: name,
-
       price: price,
     });
 
@@ -37,28 +33,20 @@ setListings(prevListings=>prevListings.filter(item=>item.id !==id))
       if (listing.id == id) {
         return {
           ...listing,
-
           name: name,
-
           price: price,
         };
       }
-
       return listing;
     });
-
-    console.log("HERE UPDATED LISTING", updatedListings);
-
     setListings(updatedListings);
   };
 
   useEffect(() => {
     async function getUserLisitngs() {
       const accountRef = collection(db, "Items");
-
       const q = query(
         accountRef,
-
         where("user_id", "==", props.userDetails.userCredential)
       );
 
@@ -76,22 +64,16 @@ setListings(prevListings=>prevListings.filter(item=>item.id !==id))
     });
   }, []);
 
-  console.log(listings);
-
   return (
     <div>
       <h1 className="pageHeading">Account</h1>
-
-      <div className="account">
+        <div className="account">
         <div className="profile">
           <img src={testImage} alt="" />
-
-          <div>
+           <div>
             <h2>{props.userDetails.name}</h2>
-
             <p>Balance: 2</p>
           </div>
-
           <div>
             <p>
               Bio: Lorem ipsum dolor sit, amet consectetur adipisicing elit.
@@ -99,11 +81,8 @@ setListings(prevListings=>prevListings.filter(item=>item.id !==id))
             </p>
           </div>
         </div>
-
         <div></div>
-
         <h1>My Listings:</h1>
-
         <div className="grid">
           {listings && listings.length > 0 ? (
             listings.map((listing) => {

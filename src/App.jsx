@@ -43,15 +43,12 @@ function App() {
       if (user) {
         setUser({
           email: user.email,
-
           userCredential: user.uid,
         });
 
         const getUserDetails = async () => {
           const accountRef = collection(db, "Account");
-
           const q = query(accountRef, where("uid", "==", user.uid));
-
           const querySnapShot = getDocs(q);
 
           return querySnapShot;
@@ -62,14 +59,12 @@ function App() {
         result.forEach((res) => {
           return setUserDetails({
             name: res.data().name,
-
             userCredential: res.data().uid,
           });
         });
       } else {
         setUser({
           email: "",
-
           userCredential: null,
         });
       }

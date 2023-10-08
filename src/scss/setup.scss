@@ -1,74 +1,67 @@
-*{
+* {
     margin: 0;
-
-
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-body{
-    background-color: #141E46 ;
-    color:#FFF5E0;
+
+body {
+    background-color: #141E46;
+    color: #FFF5E0;
     margin: 0 80px;
-
-
 }
 
-h1{
+h1 {
     color: #FF6969;
 }
-p{
-    color:#FFF5E0;
-}
-   button{
-     margin: 10px;
-     width: 100px;
-     height: 35px;
-     background-color: #FF6969;
-     border-radius: 5px;
-     border: none;
-     color: #FFF5E0;
 
-
-        
+p {
+    color: #FFF5E0;
 }
 
-a{
+button {
+    margin: 10px;
+    width: 100px;
+    height: 35px;
+    background-color: #FF6969;
+    border-radius: 5px;
+    border: none;
+    color: #FFF5E0;
+}
+
+a {
     text-decoration: none;
     outline: 0;
     color: #FFF5E0;
-    &:hover{
+
+    &:hover {
         color: white;
     }
 
 }
-
-
-
-nav{
+nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 150px;
-   
-ul{
-  
-    list-style-type: none;
-    display: flex;
-    justify-content: flex-end;
-    gap: 100px;
 
-   
+    ul {
+
+        list-style-type: none;
+        display: flex;
+        justify-content: flex-end;
+        gap: 100px;
+
+
+    }
+
 }
 
-}
-footer{
+footer {
     height: 150px;
     text-align: center;
     margin-top: 75px;
 
 }
 
-img{
+img {
     width: 200px;
 }
-
-
