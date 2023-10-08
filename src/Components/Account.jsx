@@ -20,8 +20,15 @@ export default function Account(props) {
       price: price,
     });
     const updatedListings = listings.map((listing)=>{
-      
+    if (listing.id == id){
+      return {
+        ...listing, 
+        name:name,
+        price:price
+      }
+    }
     })
+    setListings(updatedListings);
   };
 
   useEffect(() => {
@@ -97,7 +104,7 @@ const Listing = (props) => {
     return (
       <div className="grid__item">
         <h2>{props.listing.name}</h2>
-        <form onSubmit={props.handleEdit(name, price, props.listing.id)}>
+        <form onSubmit={()=>props.handleEdit(name, price, props.listing.id)}>
           <input onChange={(e)=>setName(e.target.value)} placeholder={props.listing.name} type="text" />
           <input onChange={(e)=>setPrice(e.target.value)} placeholder={props.listing.price} type="number" />
           <button type="submit">Edit</button>
