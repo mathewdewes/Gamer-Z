@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function NavBar(){
+export default function NavBar(props){
     return(
        <nav>
     <div>
@@ -11,9 +11,9 @@ export default function NavBar(){
     <div>
         <ul>
                 <li><a >Your balance: $20.00</a></li>
-                <li><Link to="/market">Market place</Link></li>
-                <li><Link to="/account">Account</Link></li>
-                <li><Link to="/">Logout</Link></li>
+                <li><Link to="/"><a>Market Place</a></Link></li>
+                <li><Link to="/account"><a>Account</a></Link></li>
+                <li><Link to="/login"><a onClick={()=>props.handleLogout}>Logout</a></Link></li>
             </ul>
 </div>
            
