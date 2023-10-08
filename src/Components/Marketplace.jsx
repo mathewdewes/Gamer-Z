@@ -4,9 +4,14 @@ import { Link } from "react-router-dom";
 import CreatItem from "./marketplace/CreateItem";
 import ListItem from "./marketplace/ListItem";
 
+
 export default function MarketPlace(props) {
   const [show, setShow] = useState(false);
   const [items, setItems] = useState([]);
+
+  const handleViewItem = ()=>{
+
+  }
 
   const handleClose = () => {
     setShow(false);

@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../firebase-config";
+import profileImage from "../../images/profileImage.png";
+import { Link } from "react-router-dom";
 
 export default function ListItem(props) {
 
@@ -26,7 +28,7 @@ export default function ListItem(props) {
     return (
       <div>
         {props.items.map((item) => {
-          return <Item name={item.name} price={item.price}/>;
+          return <Item id={item.id} name={item.name} price={item.price}/>;
         })}
       </div>
     );
@@ -38,8 +40,11 @@ export default function ListItem(props) {
 const Item=(props)=>{
     return(
         <div>
+          <img src={profileImage} alt="Profile Image" />
             <p>{props.name}</p>
             <p>{props.price}</p>
+            <Link to={`/marketplace/${props.id}`}><button onClick={props.handlePurchase}>View Item</button></Link>
+ 
         </div>
     )
 }

@@ -6,6 +6,7 @@ import Login from "./Components/Login";
 import MarketPlace from "./Components/Marketplace";
 import Account from "./Components/Account";
 import Register from "./Components/Register";
+import ViewItem from "./Components/marketplace/ViewItem";
 import { useState, useEffect } from "react";
 import {
   createUserWithEmailAndPassword,
@@ -97,6 +98,10 @@ function App() {
             element={
               <Register setUserDetails={setUserDetails} setUser={setUser} />
             }
+          />
+          <Route
+          path="/marketplace/:id"
+          element={<ViewItem/>}
           />
         </Routes>
       </div>
